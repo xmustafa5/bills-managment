@@ -19,17 +19,17 @@ function errorResponseRejectHandler(error: AxiosError) {
     AuthStorageUtils.logout()
   } else if (error.response?.status === 400) {
     toastStore.addToast({
-      message: `${error.response?.data?.error?.message ?? 'Bad Request'}`,
+      message: `${(error.response?.data as any)?.error?.message ?? 'Bad Request'}`,
       type: 'error',
     })
   } else if (error.response?.status === 403) {
     toastStore.addToast({
-      message: `${error.response.data?.error?.message ?? 'Forbidden'}`,
+      message: `${(error.response?.data as any)?.error?.message ?? 'Forbidden'}`,
       type: 'error',
     })
   } else if (error.response?.status === 404) {
     toastStore.addToast({
-      message: `${error.response.data?.error?.message ?? 'Not Found'}`,
+      message: `${(error.response?.data as any)?.error?.message ?? 'Not Found'}`,
       type: 'error',
     })
   } else if (error.response?.status === 500) {
