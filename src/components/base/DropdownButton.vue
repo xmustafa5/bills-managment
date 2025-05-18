@@ -10,18 +10,18 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const isOpen = ref(false)
-const dropdownRef = ref(null)
+const dropdownRef = ref<HTMLElement | null>(null)
 const Showlabel = computed(
   () => props.items.find((item) => item.value === model.value)?.label || props.label,
 )
 
-const handleClickOutside = (event) => {
-  if (dropdownRef.value && !dropdownRef.value.contains(event.target)) {
+const handleClickOutside = (event: MouseEvent) => {
+  if (dropdownRef.value && !dropdownRef.value.contains(event.target as Node)) {
     isOpen.value = false
   }
 }
 
-const handleSelect = (value) => {
+const handleSelect = (value: any) => {
   model.value = value
   isOpen.value = false
 }
@@ -44,12 +44,7 @@ onUnmounted(() => {
     >
       <span>{{ Showlabel }}</span>
       <div>
-        <svg
-          class="w-4 h-4 ml-2"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 10 6"
-        >
+        <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
           <path
             stroke="currentColor"
             stroke-linecap="round"
