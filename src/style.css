@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bg-container{
+    background: radial-gradient(rgba(255, 255, 255, 0.2) 10%, transparent 0px) 0px 0px / 20px 20px, radial-gradient(rgba(255, 255, 255, 0.2) 10%, transparent 0px) 20px 20px transparent;
+}
