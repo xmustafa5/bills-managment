@@ -18,17 +18,17 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <div class="flex-1 w-full overflow-auto border-b border-[#2c2d2e]">
+  <div class="flex-1 w-full overflow-auto bg-[#131415] rounded-lg shadow-md">
     <table
       class="overflow-hidden mt-2 [border-collapse:separate] border-spacing-0 w-full rounded-[10px] border-[1px] border-[#2c2d2e]"
     >
-      <thead class="text-xs uppercase shadow-[0px_4px_8px_0px_rgba(0,0,0,0.15)] sticky top-0">
+      <thead class="text-xs uppercase shadow-[0px_4px_8px_0px_rgba(0,0,0,0.15)] sticky top-0 bg-[#131415]">
         <tr class="[&_button]:hover:opacity-100 hover:bg-[#ffffff08] transition-colors">
           <th scope="col" class="relative py-[2px] px-[2px] border-b-[2px] border-[#434446]">
             <div
-              class="text-[#fff] w-full flex items-center px-[4px] text-start bg-transparent hover:bg-background-presentation-action-hover  transition-[background-color,color] duration-200 rounded-[3px] h-[32px] typography-body-medium-semibold min-w-[10px] relative"
+              class="text-[#fff] w-full flex items-center px-[4px] text-start bg-transparent hover:bg-background-presentation-action-hover transition-[background-color,color] duration-200 rounded-[3px] h-[32px] typography-body-medium-semibold min-w-[10px] relative"
             >
-              Number
+              Bill Number
               <div class="h-[80%] bg-[#2c2d2e] w-[1px] absolute -right-[2px]"></div>
             </div>
           </th>
@@ -82,7 +82,7 @@ const props = withDefaults(defineProps<Props>(), {
           </th>
           <th scope="col" class="relative py-[2px] px-[2px] border-b-[2px] border-[#434446]">
             <div
-              class="text-[#fff] w-full flex items-center px-[4px] text-start bg-transparent hover:bg-background-presentation-action-hover  transition-[background-color,color] duration-200 rounded-[3px] h-[32px] typography-body-medium-semibold min-w-[10px]"
+              class="text-[#fff] w-full flex items-center px-[4px] text-start bg-transparent hover:bg-background-presentation-action-hover transition-[background-color,color] duration-200 rounded-[3px] h-[32px] typography-body-medium-semibold min-w-[10px]"
             >
               Actions
             </div>
@@ -90,17 +90,20 @@ const props = withDefaults(defineProps<Props>(), {
         </tr>
       </thead>
       <tbody>
-        <RowTableSkeleton v-if="props.loading" />
-        <tr v-else-if="props.items.length === 0">
-          <td class="text-center text-2xl py-8 text-[#e5e5e5]" colspan="8">No data available</td>
-        </tr>
+        <template v-if="loading">
+          <RowTableSkeleton />
+        </template>
+        <template v-else-if="items.length === 0">
+          <tr>
+            <td colspan="8" class="py-8 text-center text-[#e5e5e5]">
+              No bills found. Try adjusting your filters or add a new bill.
+            </td>
+          </tr>
+        </template>
         <tr
-          v-else
-          v-for="(item, i) in props.items"
-          :key="i"
-          :class="[{ 'border-b': i !== props.items.length - 1 }]"
-          class="[&>td]:px-4 [&>td]:py-3 hover:bg-[#ffffff08] cursor-pointer text-[#e5e5e5]"
-          @click="emit('view', item.id)"
+          v-for="item in items"
+          :key="item.id"
+          class="hover:bg-[#ffffff08] transition-colors"
         >
           <td
             class="truncate h-[40px] text-[#e5e5e5]  relative border-r border-b border-[#434446] px-1 rtl:border-l rtl:border-r-0 break-all text-[12px] "
@@ -118,9 +121,24 @@ const props = withDefaults(defineProps<Props>(), {
             {{ Number(item.amount).toLocaleString() }}
           </td>
           <td
-            class="truncate h-[40px] text-[#e5e5e5]  relative border-r border-b border-[#434446] px-1 rtl:border-l rtl:border-r-0 break-all text-[12px] font-normal"
+            class="truncate h-[40px] text-[#e5e5e5] relative border-r border-b border-[#434446] px-1 rtl:border-l rtl:border-r-0 break-all text-[12px] font-normal"
           >
-            {{ item.paidStatus }}
+            <div
+              :class="[
+                'flex items-center gap-1 px-[6px] py-1 rounded-lg w-fit',
+                item.paidStatus === 'paid'
+                  ? 'border border-[#00679a] bg-[#00679a33]'
+                  : 'border border-[#88071d] bg-[#00151f]'
+              ]"
+            >
+              <div
+                :class="[
+                  'size-1 rounded-full',
+                  item.paidStatus === 'paid' ? 'bg-[#00679a]' : 'bg-[#88071d]'
+                ]"
+              ></div>
+              {{ item.paidStatus }}
+            </div>
           </td>
           <td
             class="truncate h-[40px] text-[#e5e5e5]  relative border-r border-b border-[#434446] px-1 rtl:border-l rtl:border-r-0 break-all text-[12px] font-normal"
@@ -137,12 +155,33 @@ const props = withDefaults(defineProps<Props>(), {
           >
             {{ item.receivingStation }}
           </td>
-          <td class="flex items-center gap-4  truncate h-[43px] text-[#e5e5e5]  relative border-r border-b border-[#434446] px-1 rtl:border-l rtl:border-r-0 break-all text-[12px] font-normal">
-            <span class="cursor-pointer hover:bg-[#ffffff08] p-1 rounded-md  transition-colors duration-200" @click.stop="emit('edit', item.id)">
+          <td class="flex items-center gap-4 truncate h-[43px] text-[#e5e5e5] relative border-r border-b border-[#434446] px-1 rtl:border-l rtl:border-r-0 break-all text-[12px] font-normal">
+            <span class="cursor-pointer hover:bg-[#ffffff15] p-1 rounded-md transition-colors duration-200" @click.stop="emit('view', item.id)">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
-                viewBox="0 0 28 28"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                />
+              </svg>
+            </span>
+            <span class="cursor-pointer hover:bg-[#ffffff15] p-1 rounded-md transition-colors duration-200" @click.stop="emit('edit', item.id)">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
                 class="size-6"
@@ -154,7 +193,7 @@ const props = withDefaults(defineProps<Props>(), {
                 />
               </svg>
             </span>
-            <span class="cursor-pointer hover:bg-[#ffffff08] p-1 rounded-md  transition-colors duration-200" @click.stop="emit('delete', item.id)">
+            <span class="cursor-pointer hover:bg-[#ffffff15] p-1 rounded-md transition-colors duration-200" @click.stop="emit('delete', item.id)">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
