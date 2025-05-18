@@ -102,7 +102,12 @@ const props = withDefaults(defineProps<Props>(), {
             </td>
           </tr>
         </template>
-        <tr v-for="item in items" :key="item.id" class="hover:bg-[#ffffff08] transition-colors">
+        <tr
+          v-for="item in items"
+          v-if="!loading"
+          :key="item.id"
+          class="hover:bg-[#ffffff08] transition-colors"
+        >
           <td
             class="truncate h-[40px] text-[#e5e5e5] relative border-r border-b border-[#434446] px-1 rtl:border-l rtl:border-r-0 break-all text-[12px]"
           >
