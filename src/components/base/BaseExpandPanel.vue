@@ -51,25 +51,27 @@ const isOpen = ref(false)
 const toggleAccordion = () => {
   isOpen.value = !isOpen.value
 }
-const beforeEnter = (el: HTMLElement) => {
-  el.style.height = '0px'
+const beforeEnter = (el: Element) => {
+  ;(el as HTMLElement).style.height = '0px'
 }
 
-const enter = (el: HTMLElement) => {
-  el.style.height = el.scrollHeight + 'px'
-  el.addEventListener(
+const enter = (el: Element) => {
+  const htmlEl = el as HTMLElement
+  htmlEl.style.height = htmlEl.scrollHeight + 'px'
+  htmlEl.addEventListener(
     'transitionend',
     () => {
-      el.style.height = 'auto'
+      htmlEl.style.height = 'auto'
     },
     { once: true },
   )
 }
 
-const leave = (el: HTMLElement) => {
-  el.style.height = el.scrollHeight + 'px'
+const leave = (el: Element) => {
+  const htmlEl = el as HTMLElement
+  htmlEl.style.height = htmlEl.scrollHeight + 'px'
   requestAnimationFrame(() => {
-    el.style.height = '0px'
+    htmlEl.style.height = '0px'
   })
 }
 </script>

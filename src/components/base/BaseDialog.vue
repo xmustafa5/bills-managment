@@ -66,16 +66,16 @@ defineProps({
   opacity: 0;
 }
 
-.modal-enter-active .bg-[#131415],
-.modal-leave-active .bg-[#131415] {
+.modal-enter-active .\[bg-\[#131415\]\],
+.modal-leave-active .\[bg-\[#131415\]\] {
   transition: transform 0.3s ease;
 }
 
-.modal-enter-from .bg-[#131415] {
+.modal-enter-from .\[bg-\[#131415\]\] {
   transform: scale(0.9);
 }
 
-.modal-leave-to .bg-[#131415] {
+.modal-leave-to .\[bg-\[#131415\]\] {
   transform: scale(0.9);
 }
 </style>

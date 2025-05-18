@@ -46,11 +46,7 @@ const drawerStyles = computed(() => {
     <Transition name="dialog-backdrop">
       <div v-if="model" class="drawer-container" @click.self="closeDrawer">
         <Transition name="dialog-content">
-          <div
-            v-if="model"
-            class="drawer"
-            :style="drawerStyles"
-          >
+          <div v-if="model" class="drawer" :style="drawerStyles">
             <div class="py-3 px-6 border-b border-gray-200 flex justify-between items-center">
               <span class="text-2xl">{{ title }}</span>
               <button class="close-button" @click="closeDrawer">×</button>
