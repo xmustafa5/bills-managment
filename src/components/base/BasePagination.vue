@@ -50,7 +50,7 @@ const handlePageChange = (page: number) => {
 
 <template>
   <nav
-    class="flex flex-col md:flex-row justify-between items-start md:items-center p-4 border-t border-[#434446]"
+    class="flex flex-col md:flex-row justify-between items-start md:items-center p-4 border rounded-lg border-[#2c2d2e]"
     aria-label="Table navigation"
   >
     <span class="w-full md:text-start text-center text-sm font-normal text-[#e5e5e5]">

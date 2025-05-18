@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<Props>(), {
 const isOpen = ref(false)
 const dropdownRef = ref(null)
 const Showlabel = computed(
-  () => props.items.find((item) => item.value === model.value)?.labe || props.label,
+  () => props.items.find((item) => item.value === model.value)?.label || props.label,
 )
 
 const handleClickOutside = (event) => {
@@ -36,20 +36,16 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div ref="dropdownRef" class="relative w-28">
+  <div ref="dropdownRef" class="relative inline-block text-left w-full">
     <button
       @click="isOpen = !isOpen"
-      class="w-full text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center"
       type="button"
+      class="inline-flex justify-between w-full px-4 py-2 text-[#e5e5e5] bg-[#1c1d1f] border border-[#2c2d2e] rounded-lg hover:bg-[#27292b] focus:outline-none focus:ring-2 focus:ring-indigo-500"
     >
-      <div class="w-full flex items-center">
-        <span>
-          {{ Showlabel }}
-        </span>
+      <span>{{ Showlabel }}</span>
+      <div>
         <svg
-          class="w-2.5 h-2.5 ms-3 transition-transform"
-          :class="{ 'rotate-180': isOpen }"
-          aria-hidden="true"
+          class="w-4 h-4 ml-2"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 10 6"
@@ -67,13 +63,13 @@ onUnmounted(() => {
 
     <div
       v-if="isOpen"
-      class="absolute z-10 mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+      class="absolute z-10 mt-2 bg-[#1c1d1f] border border-[#2c2d2e] divide-y divide-[#2c2d2e] rounded-lg shadow-lg w-full"
     >
-      <ul class="py-2 text-sm text-gray-700">
+      <ul class="py-2 text-sm text-[#e5e5e5]">
         <li v-for="item in items" :key="item.value">
           <button
             @click="handleSelect(item.value)"
-            class="w-full text-left px-4 py-2 hover:bg-gray-100"
+            class="w-full text-left px-4 py-2 hover:bg-[#27292b] transition-colors"
           >
             {{ item.label }}
           </button>

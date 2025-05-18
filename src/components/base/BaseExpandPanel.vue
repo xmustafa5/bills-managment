@@ -8,7 +8,7 @@
     <h2 id="accordion-flush-heading-1">
       <button
         type="button"
-        class="flex items-center justify-between w-full p-3 font-medium rtl:text-right text-[#a0a0a0] border-b border-[#2c2d2e] dark:border-gray-700 dark:text-gray-400 gap-3"
+        class="flex items-center justify-between w-full p-3 font-medium rtl:text-right text-[#a0a0a0] border-b border-[#2c2d2e] gap-3 hover:bg-[#ffffff08]"
         @click="toggleAccordion"
       >
         <span>{{ title }}</span>
@@ -32,7 +32,7 @@
     </h2>
     <transition name="accordion" @before-enter="beforeEnter" @enter="enter" @leave="leave">
       <div v-show="isOpen" class="overflow-hidden">
-        <div class="p-3 border-b border-gray-200 dark:border-gray-700">
+        <div class="p-3 border-b border-[#2c2d2e]">
           <slot></slot>
         </div>
       </div>
