@@ -1,7 +1,7 @@
 <script lang="ts" setup></script>
 
 <template>
-  <tr v-for="i in 10" :key="i" class="animate-pulse [&>td]:px-4 [&>td]:py-3 border-b">
+  <tr v-for="i in 1" :key="i" class="animate-pulse [&>td]:px-4 [&>td]:py-3 border-b">
     <td v-for="j in 7" :key="j" class="whitespace-nowrap">
       <div class="h-4 bg-gray-200 rounded w-20"></div>
     </td>

@@ -116,16 +116,14 @@ watch(
 
 <template>
   <div class="mx-auto max-h-[600px] p-4 overflow-auto">
-    <h1>Bill</h1>
-
     <BaseFormSkeleton v-if="getItemLoading" />
     <Form
       v-else
       @submit="handleSub"
       :validation-schema="billSchema"
-      class="space-y-4 h-full flex flex-col justify-between"
+      class="space-y-6 h-full flex flex-col justify-between"
     >
-      <div>
+      <div class="space-y-6">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="col-span-2">
             <BaseTextField
@@ -215,75 +213,77 @@ watch(
             />
           </div>
         </div>
-        <Form
-          :key="form.transactions.length"
-          @submit="handleAddTransaction"
-          :validation-schema="transactionSchema"
-          class="space-y-4 border rounded-lg p-4 mt-3"
-        >
-          <h3 class="text-lg font-semibold">Transaction</h3>
-          <div
-            v-for="(transaction, index) in form.transactions"
-            :key="index"
-            class="border py-2 rounded-lg px-4 relative"
-          >
-            <button
-              type="button"
-              class="absolute top-2 right-2 text-red-500"
-              @click="handelDeleteTransaction(index)"
+
+        <div class="border-t border-[#2c2d2e] pt-6">
+          <h3 class="text-lg font-medium text-[#e5e5e5] mb-4">Transactions</h3>
+
+          <div v-if="form.transactions.length > 0" class="mb-4 space-y-3">
+            <div
+              v-for="(transaction, index) in form.transactions"
+              :key="index"
+              class="flex justify-between items-center p-3 bg-[#131415] rounded-lg border border-[#2c2d2e] hover:border-[#434446] transition-colors"
             >
-              ✕
-            </button>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div class="col-span-2 md:col-span-1">
-                <label> Amount: {{ Number(transaction.amount).toLocaleString() }} </label>
+              <div class="flex flex-col">
+                <span class="text-[#e5e5e5] font-medium">{{ Number(transaction.amount).toLocaleString() }}</span>
+                <span class="text-sm text-gray-400">{{ transaction.paymentDate }}</span>
               </div>
-              <div class="col-span-2 md:col-span-1">
-                <label> Payment Date: {{ transaction.paymentDate }} </label>
-              </div>
+              <button
+                @click="handelDeleteTransaction(index)"
+                class="text-red-500 hover:text-red-700 transition-colors"
+              >
+                ✕
+              </button>
             </div>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="form-group col-span-2 md:col-span-1">
-              <BaseTextField
-                v-model="transactionForm.amount"
-                name="transactionAmount"
-                label="Amount"
-                type="text"
-                placeholder="1500"
-                required
-              />
+          <Form
+            @submit="handleAddTransaction"
+            :validation-schema="transactionSchema"
+            class="bg-[#1c1d1f] p-4 rounded-lg border border-[#2c2d2e]"
+          >
+            <h4 class="text-md font-medium text-[#e5e5e5] mb-3">Add New Transaction</h4>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="form-group col-span-2 md:col-span-1">
+                <BaseTextField
+                  v-model="transactionForm.amount"
+                  name="transactionAmount"
+                  label="Amount"
+                  type="text"
+                  placeholder="1000"
+                  required
+                />
+              </div>
+              <div class="form-group col-span-2 md:col-span-1">
+                <BaseTextField
+                  v-model="transactionForm.paymentDate"
+                  name="transactionPaymentDate"
+                  label="Payment Date"
+                  type="date"
+                  placeholder="2024-01-01"
+                  required
+                />
+              </div>
             </div>
-            <div class="form-group col-span-2 md:col-span-1">
-              <BaseTextField
-                v-model="transactionForm.paymentDate"
-                name="transactionPaymentDate"
-                label="Payment Date"
-                type="date"
-                placeholder="2024-01-01"
-                required
-              />
+            <div class="flex justify-end mt-4">
+              <button
+                type="submit"
+                class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+              >
+                Add Transaction
+              </button>
             </div>
-          </div>
-          <div class="flex justify-end">
-            <button
-              type="submit"
-              class="w-24 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <span> Add </span>
-            </button>
-          </div>
-        </Form>
+          </Form>
+        </div>
       </div>
 
-      <div class="flex justify-end">
+      <div class="flex justify-end pt-4 border-t border-[#2c2d2e]">
         <button
           type="submit"
-          class="w-24 px-4 py-2 my-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
         >
           <BaseLoadingSpinner v-if="isLoading" />
-          <span v-else> {{ props.id ? 'Update' : 'Create' }} </span>
+          <span v-else> {{ props.id ? 'Update Bill' : 'Create Bill' }} </span>
         </button>
       </div>
     </Form>

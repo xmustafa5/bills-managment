@@ -21,51 +21,55 @@ function logout() {
 </script>
 
 <template>
-  <div class="flex flex-col items-start p-4 gap-4 overflow-auto">
-    <div class="flex items-center gap-4 justify-between w-full">
-      <h2 class="min-w-fit text-2xl font-bold text-[#e5e5e5] flex-shrink">Bills Management</h2>
-      <div class="flex gap-2 flex-shrink-0">
-        <button
-          @click="emit('add')"
-          class="flex min-w-fit items center gap-[3px] px-3 h-[34px] justify-center items-center  text-[#e5e5e5] bg-[#ffffff26] rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 "
+  <div class="flex items-center gap-4 justify-between relative w-full px-4  h-[60px] bg-[#000 rounded-t-[6px] border-b border-[#2c2d2e] bg-black">
+<div
+  class="absolute top-[0px] w-[170px] rounded-t-[6px] z-10 h-full left-[0px] bg-[linear-gradient(132deg,#0d0f4e_0%,#000_50%)]"
+
+></div>
+    <h2 class="min-w-fit text-2xl text-[#e5e5e5] z-20  flex-shrink  text-[28px] leading-[120%] font-normal tracking-[-0.28px]">Bills Management</h2>
+    <div class="flex gap-2 flex-shrink-0">
+      <button
+        @click="emit('add')"
+        class="flex min-w-fit items center gap-[3px] px-3 h-[34px] justify-center items-center  text-[#e5e5e5] bg-[#ffffff26] rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 "
+      >
+        <svg
+          class="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <svg
-            class="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-            ></path>
-          </svg>
-          <span class="hidden md:block">Add Bill</span>
-        </button>
-        <button
-          @click="confirmDialog = true"
-          class="flex min-w-fit items center gap-2 px-2 justify-center  items-center h-[34px] text-[#e5e5e5] bg-[#ffffff26] rounded-lg shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 "
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+          ></path>
+        </svg>
+        <span class="hidden md:block">Add Bill</span>
+      </button>
+      <button
+        @click="confirmDialog = true"
+        class="flex min-w-fit items center gap-2 px-2 justify-center  items-center h-[34px] text-[#e5e5e5] bg-[#ffffff26] rounded-lg shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 "
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <svg
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-            ></path>
-          </svg>
-        </button>
-      </div>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+          ></path>
+        </svg>
+      </button>
     </div>
+  </div>
+  <div class="flex flex-col items-start px-4  gap-4 ">
     <div class="flex-1 flex gap-4 flex-wrap">
       <div class="flex md:items-center border border-[#797c7f] rounded-lg text-[#e5e5e5] min-w-fit gap-1 break-words bg-[#ffffff1a] px-[6px] text-[12px]">
         <div class="size-1 bg-[#797c7f] rounded-full"></div>

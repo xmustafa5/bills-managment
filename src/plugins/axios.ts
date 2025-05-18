@@ -9,15 +9,18 @@ const axiosIns = axios.create({
 const mock = new MockAdapter(axiosIns, { delayResponse: 2000, onNoMatch: 'throwException' })
 const STORAGE_KEY = 'bills'
 
-// Initialize localStorage with mock data if empty
-if (!localStorage.getItem(STORAGE_KEY)) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify([]))
+// Import demo data
+import demoData from '../../demo.json'
+
+// Initialize localStorage with demo data if empty
+if (localStorage.getItem(STORAGE_KEY) === '[]') {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(demoData))
 }
 
 mock.onPost('/api/login').reply((config) => {
   try {
     const { email, password } = JSON.parse(config.data)
-    if (email === 'user@example.com' && password === 'password') {
+    if (email === 'admin@gmail.com' && password === 'admin123') {
       return [200, { token: 'mock-jwt-token' }]
     }
     return [401, { message: 'Invalid credentials' }]
@@ -165,7 +168,8 @@ mock.onPost('/api/bills').reply((config) => {
     const maxId = bills.reduce((max, bill) => Math.max(max, bill?.id || 0), 0)
     const newBill = { ...billData, id: maxId + 1 }
 
-    bills.push(newBill)
+    // Add new bill to the beginning of the array instead of the end
+    bills.unshift(newBill)
     localStorage.setItem(STORAGE_KEY, JSON.stringify(bills))
 
     toastStore.addToast({

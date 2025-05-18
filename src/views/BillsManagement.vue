@@ -8,6 +8,10 @@ import BillsForm from '@/components/billsManagement/BillsForm.vue'
 import BillsTable from '@/components/billsManagement/BillsTable.vue'
 import type { BillsFilterType } from '@/models/bills'
 import type { Pagination } from '@/models/share'
+import BaseDialog from '@/components/base/BaseDialog.vue'
+import BaseConfirmDialog from '@/components/base/BaseConfirmDialog.vue'
+import BillsHeader from '@/components/billsManagement/BillsHeader.vue'
+import BillsView from '@/components/billsManagement/BillsView.vue'
 
 const items = ref([])
 const statistics = reactive({
@@ -31,7 +35,8 @@ const pagination = ref<Pagination>({
   maxVisiblePages: 4,
 })
 
-const filters = ref<BillsFilterType>({
+const filter = ref<BillsFilterType>({
+  billNumber: '',
   paidStatus: '',
   billStatus: '',
   receivingStation: '',
@@ -74,7 +79,7 @@ async function getBills() {
     .get('api/bills', {
       page: pagination.value.currentPage,
       perPage: pagination.value.itemsPerPage,
-      ...filters.value,
+      ...filter.value,
     })
     .then((res) => {
       pagination.value.totalItems = res.totalCount
@@ -89,12 +94,43 @@ async function getBills() {
     })
 }
 
+function handleAdd() {
+  itemIdToEdit.value = null
+  showFormDrawer.value = true
+}
+
+function handleFilter() {
+  if (pagination.value.currentPage === 1) {
+    getBills()
+  } else {
+    pagination.value.currentPage = 1
+  }
+}
+
+function resetFilter() {
+  Object.assign(filter.value, {
+    billNumber: '',
+    paidStatus: '',
+    billStatus: '',
+    receivingStation: '',
+    issuingDateStart: '',
+    issuingDateEnd: '',
+    executionDateStart: '',
+    executionDateEnd: '',
+  })
+  if (pagination.value.currentPage === 1) {
+    getBills()
+  } else {
+    pagination.value.currentPage = 1
+  }
+}
+
 onMounted(() => {
   getBills()
 })
 
 watch(
-  () => filters.value,
+  () => filter.value,
   () => {
     if (pagination.value.currentPage === 1) {
       getBills()
@@ -125,17 +161,41 @@ watch(
 </script>
 
 <template>
-  <div class="size-full flex flex-col  relative shadow-md sm:rounded-lg overflow-hidden">
+  <div class="flex flex-col h-full gap-4 p-[2px] relative  bg-[#2c2d2e] rounded-lg
+  bg-[linear-gradient(143deg,#0075ff_0px,#2c2d2e_55px)]
+  ">
+
+
+    <div class="flex flex-col h-full gap-4  rounded-md bg-[#090b0d] relative z-20">
+
     <BillsHeader
-      @add="showFormDrawer = true"
-      :totalItems="pagination.totalItems"
+      :total-items="pagination.totalItems"
       :statistics="statistics"
+      @add="handleAdd"
     />
-    <div>
+<div class="p-2 flex flex-col gap-2 h-full">
+
+    <div class="bg-[#131415] rounded-lg shadow-md overflow-hidden">
       <BaseExpandPanel title="Filters">
-        <BillsFilter v-model="filters" />
+        <BillsFilter v-model="filter" @filter="handleFilter" />
+        <div class="flex justify-end mt-4 gap-2">
+          <button
+            @click="resetFilter"
+            class="px-4 py-2 text-gray-400 bg-[#27292b] rounded-md hover:bg-[#323436] transition-colors"
+          >
+            Reset
+          </button>
+          <button
+            @click="getBills"
+            class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+          >
+            Apply Filter
+          </button>
+        </div>
       </BaseExpandPanel>
     </div>
+
+
     <BillsTable
       :loading="loading"
       :items="items"
@@ -143,22 +203,30 @@ watch(
       @edit="handleEdit"
       @view="handleView"
     />
+
     <BasePagination
       v-model:currentPage="pagination.currentPage"
       :totalItems="pagination.totalItems"
       :itemsPerPage="pagination.itemsPerPage"
       :maxVisiblePages="pagination.maxVisiblePages"
     />
+
     <BaseDeleteDialog
       @done="getBills"
       v-model="showDeleteDialog"
       :url="`/api/bills/${itemIdToDelete}`"
     />
+
     <BaseDialog v-model="showFormDrawer" :title="itemIdToEdit ? 'Edit Bill' : 'Add Bill'">
       <BillsForm :id="itemIdToEdit" @done="handleFormDone" />
     </BaseDialog>
+
     <BaseDialog v-model="showViewDrawer">
       <BillsView :id="itemIdToView" @edit="handleEdit" />
     </BaseDialog>
+</div>
+
   </div>
+    </div>
+
 </template>
