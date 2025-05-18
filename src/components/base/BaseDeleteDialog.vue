@@ -46,8 +46,8 @@ async function handleConfirm() {
               <div class="sm:flex sm:items-start">
                 <div
                   class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-[#88071d] sm:mx-0 sm:size-10"
-                  >
-                    <svg
+                >
+                  <svg
                     class="size-6 text-[#ff516e]"
                     fill="none"
                     viewBox="0 0 24 24"

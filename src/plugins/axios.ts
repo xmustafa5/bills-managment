@@ -30,7 +30,7 @@ mock.onPost('/api/login').reply((config) => {
 })
 
 // Helper function to safely parse JSON with error handling
-const safeJsonParse = (data, fallback = []) => {
+const safeJsonParse = (data: any, fallback = []) => {
   try {
     return JSON.parse(data) || fallback
   } catch (error) {
@@ -78,7 +78,7 @@ mock.onGet('/api/bills').reply((config) => {
     const validPerPage = Math.max(1, Math.min(100, parseInt(perPage) || 10))
 
     // Apply filters with null checks
-    const filteredBills = bills.filter((bill) => {
+    const filteredBills = bills.filter((bill: any) => {
       if (!bill) return false // Skip invalid bills
 
       const matchBillNumber =
@@ -117,15 +117,15 @@ mock.onGet('/api/bills').reply((config) => {
       items: paginatedBills,
       totalCount: filteredBills.length,
       totalPaidAmount: bills.reduce(
-        (sum, bill) => (bill.paidStatus === 'paid' ? sum + (Number(bill.amount) || 0) : sum),
+        (sum: any, bill: any) => (bill.paidStatus === 'paid' ? sum + (Number(bill.amount) || 0) : sum),
         0,
       ),
       totalUnpaidAmount: bills.reduce(
-        (sum, bill) => (bill.paidStatus === 'unpaid' ? sum + (Number(bill.amount) || 0) : sum),
+        (sum: any, bill: any) => (bill.paidStatus === 'unpaid' ? sum + (Number(bill.amount) || 0) : sum),
         0,
       ),
-      executedCount: bills.filter((bill) => bill.billStatus === 'executed').length,
-      pendingCount: bills.filter((bill) => bill.billStatus === 'pending').length,
+      executedCount: bills.filter((bill: any) => bill.billStatus === 'executed').length,
+      pendingCount: bills.filter((bill: any) => bill.billStatus === 'pending').length,
       currentPage: validPage,
       totalPages: Math.ceil(bills.length / validPerPage),
     }
@@ -140,13 +140,13 @@ mock.onGet('/api/bills').reply((config) => {
 mock.onGet(/\/api\/bills\/\d+/).reply((config) => {
   try {
     const bills = safeJsonParse(localStorage.getItem(STORAGE_KEY), [])
-    const id = parseInt(config.url.split('/').pop())
+    const id = parseInt(config.url?.split('/').pop() || '0')
 
     if (isNaN(id)) {
       return [400, { error: 'Invalid ID format' }]
     }
 
-    const bill = bills.find((bill) => bill && bill.id === id)
+    const bill = bills.find((bill: any) => bill && bill.id === id)
     return bill ? [200, bill] : [404, { error: 'Bill not found' }]
   } catch (error) {
     console.error('Error in GET /api/bills/:id:', error)
@@ -165,7 +165,7 @@ mock.onPost('/api/bills').reply((config) => {
     }
 
     // Generate a unique ID
-    const maxId = bills.reduce((max, bill) => Math.max(max, bill?.id || 0), 0)
+    const maxId = bills.reduce((max: any, bill: any) => Math.max(max, bill?.id || 0), 0)
     const newBill = { ...billData, id: maxId + 1 }
 
     // Add new bill to the beginning of the array instead of the end
@@ -187,7 +187,7 @@ mock.onPut(/\/api\/bills\/\d+/).reply((config) => {
   const toastStore = useToastStore()
   try {
     const bills = safeJsonParse(localStorage.getItem(STORAGE_KEY), [])
-    const id = parseInt(config.url.split('/').pop())
+    const id = parseInt(config.url?.split('/').pop() || '0')
 
     if (isNaN(id)) {
       return [400, { error: 'Invalid ID format' }]
@@ -198,7 +198,7 @@ mock.onPut(/\/api\/bills\/\d+/).reply((config) => {
       return [400, { error: 'Invalid bill data' }]
     }
 
-    const index = bills.findIndex((bill) => bill && bill.id === id)
+    const index = bills.findIndex((bill: any) => bill && bill.id === id)
     if (index === -1) {
       return [404, { error: 'Bill not found' }]
     }
@@ -222,13 +222,13 @@ mock.onDelete(/\/api\/bills\/\d+/).reply((config) => {
   const toastStore = useToastStore()
   try {
     const bills = safeJsonParse(localStorage.getItem(STORAGE_KEY), [])
-    const id = parseInt(config.url.split('/').pop())
+    const id = parseInt(config.url?.split('/').pop() || '0')
 
     if (isNaN(id)) {
       return [400, { error: 'Invalid ID format' }]
     }
 
-    const index = bills.findIndex((bill) => bill && bill.id === id)
+    const index = bills.findIndex((bill: any) => bill && bill.id === id)
     if (index === -1) {
       return [404, { error: 'Bill not found' }]
     }
