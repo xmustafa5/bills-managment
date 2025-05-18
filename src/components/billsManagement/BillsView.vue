@@ -28,7 +28,7 @@ const getBill = async () => {
   isLoading.value = true
   await baseService
     .get(`/api/bills/${props.id}`)
-    .then((res) => {
+    .then((res: any) => {
       item.id = res.id
       item.billNumber = res.billNumber
       item.receiver = res.receiver
@@ -63,7 +63,10 @@ watch(
   <div class="max-w-2xl mx-auto max-h-[80vh] bg-[#1c1d1f] rounded-lg shadow p-6 overflow-auto">
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-xl font-bold text-[#e5e5e5]">
-        <span v-if="isLoading" class="animate-pulse h-8 bg-[#37383a] rounded w-32 inline-block"></span>
+        <span
+          v-if="isLoading"
+          class="animate-pulse h-8 bg-[#37383a] rounded w-32 inline-block"
+        ></span>
         <span v-else>Bill #{{ item.billNumber }}</span>
       </h2>
       <button
@@ -113,10 +116,13 @@ watch(
                   'border-[#88071d] bg-[#00151f]': item.paidStatus !== 'paid',
                 }"
               >
-                <div class="size-1 rounded-full" :class="{
-                  'bg-[#089c54]': item.paidStatus === 'paid',
-                  'bg-[#88071d]': item.paidStatus !== 'paid',
-                }"></div>
+                <div
+                  class="size-1 rounded-full"
+                  :class="{
+                    'bg-[#089c54]': item.paidStatus === 'paid',
+                    'bg-[#88071d]': item.paidStatus !== 'paid',
+                  }"
+                ></div>
                 {{ item.paidStatus }}
               </span>
             </div>
@@ -133,11 +139,12 @@ watch(
       <div class="bg-[#131415] rounded-lg p-4 border border-[#2c2d2e]">
         <h3 class="text-lg font-medium text-[#e5e5e5] mb-4">Transactions</h3>
 
-        <div
-          v-if="isLoading"
-          class="space-y-3"
-        >
-          <div v-for="i in 3" :key="i" class="animate-pulse flex justify-between items-center p-4 bg-[#1c1d1f] rounded-lg">
+        <div v-if="isLoading" class="space-y-3">
+          <div
+            v-for="i in 3"
+            :key="i"
+            class="animate-pulse flex justify-between items-center p-4 bg-[#1c1d1f] rounded-lg"
+          >
             <div class="flex items-center space-x-3">
               <div class="flex-shrink-0 w-2 h-2 bg-[#37383a] rounded-full"></div>
               <div class="h-5 bg-[#37383a] rounded w-24"></div>

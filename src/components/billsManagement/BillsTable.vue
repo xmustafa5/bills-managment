@@ -22,7 +22,9 @@ const props = withDefaults(defineProps<Props>(), {
     <table
       class="overflow-hidden mt-2 [border-collapse:separate] border-spacing-0 w-full rounded-[10px] border-[1px] border-[#2c2d2e]"
     >
-      <thead class="text-xs uppercase shadow-[0px_4px_8px_0px_rgba(0,0,0,0.15)] sticky top-0 bg-[#131415]">
+      <thead
+        class="text-xs uppercase shadow-[0px_4px_8px_0px_rgba(0,0,0,0.15)] sticky top-0 bg-[#131415]"
+      >
         <tr class="[&_button]:hover:opacity-100 hover:bg-[#ffffff08] transition-colors">
           <th scope="col" class="relative py-[2px] px-[2px] border-b-[2px] border-[#434446]">
             <div
@@ -34,7 +36,7 @@ const props = withDefaults(defineProps<Props>(), {
           </th>
           <th scope="col" class="relative py-[2px] px-[2px] border-b-[2px] border-[#434446]">
             <div
-              class="text-[#fff] w-full flex items-center px-[4px] text-start bg-transparent hover:bg-background-presentation-action-hover  transition-[background-color,color] duration-200 rounded-[3px] h-[32px] typography-body-medium-semibold min-w-[10px] relative"
+              class="text-[#fff] w-full flex items-center px-[4px] text-start bg-transparent hover:bg-background-presentation-action-hover transition-[background-color,color] duration-200 rounded-[3px] h-[32px] typography-body-medium-semibold min-w-[10px] relative"
             >
               Receiver
               <div class="h-[80%] bg-[#2c2d2e] w-[1px] absolute -right-[2px]"></div>
@@ -42,7 +44,7 @@ const props = withDefaults(defineProps<Props>(), {
           </th>
           <th scope="col" class="relative py-[2px] px-[2px] border-b-[2px] border-[#434446]">
             <div
-              class="text-[#fff] w-full flex items-center px-[4px] text-start bg-transparent hover:bg-background-presentation-action-hover  transition-[background-color,color] duration-200 rounded-[3px] h-[32px] typography-body-medium-semibold min-w-[10px] relative"
+              class="text-[#fff] w-full flex items-center px-[4px] text-start bg-transparent hover:bg-background-presentation-action-hover transition-[background-color,color] duration-200 rounded-[3px] h-[32px] typography-body-medium-semibold min-w-[10px] relative"
             >
               Amount
               <div class="h-[80%] bg-[#2c2d2e] w-[1px] absolute -right-[2px]"></div>
@@ -50,7 +52,7 @@ const props = withDefaults(defineProps<Props>(), {
           </th>
           <th scope="col" class="relative py-[2px] px-[2px] border-b-[2px] border-[#434446]">
             <div
-              class="text-[#fff] w-full flex items-center px-[4px] text-start bg-transparent hover:bg-background-presentation-action-hover  transition-[background-color,color] duration-200 rounded-[3px] h-[32px] typography-body-medium-semibold min-w-[10px] relative"
+              class="text-[#fff] w-full flex items-center px-[4px] text-start bg-transparent hover:bg-background-presentation-action-hover transition-[background-color,color] duration-200 rounded-[3px] h-[32px] typography-body-medium-semibold min-w-[10px] relative"
             >
               Paid Status
               <div class="h-[80%] bg-[#2c2d2e] w-[1px] absolute -right-[2px]"></div>
@@ -58,7 +60,7 @@ const props = withDefaults(defineProps<Props>(), {
           </th>
           <th scope="col" class="relative py-[2px] px-[2px] border-b-[2px] border-[#434446]">
             <div
-              class="text-[#fff] w-full flex items-center px-[4px] text-start bg-transparent hover:bg-background-presentation-action-hover  transition-[background-color,color] duration-200 rounded-[3px] h-[32px] typography-body-medium-semibold min-w-[10px] relative"
+              class="text-[#fff] w-full flex items-center px-[4px] text-start bg-transparent hover:bg-background-presentation-action-hover transition-[background-color,color] duration-200 rounded-[3px] h-[32px] typography-body-medium-semibold min-w-[10px] relative"
             >
               Issuing Date
               <div class="h-[80%] bg-[#2c2d2e] w-[1px] absolute -right-[2px]"></div>
@@ -66,7 +68,7 @@ const props = withDefaults(defineProps<Props>(), {
           </th>
           <th scope="col" class="relative py-[2px] px-[2px] border-b-[2px] border-[#434446]">
             <div
-              class="text-[#fff] w-full flex items-center px-[4px] text-start bg-transparent hover:bg-background-presentation-action-hover  transition-[background-color,color] duration-200 rounded-[3px] h-[32px] typography-body-medium-semibold min-w-[10px] relative"
+              class="text-[#fff] w-full flex items-center px-[4px] text-start bg-transparent hover:bg-background-presentation-action-hover transition-[background-color,color] duration-200 rounded-[3px] h-[32px] typography-body-medium-semibold min-w-[10px] relative"
             >
               Execution Date
               <div class="h-[80%] bg-[#2c2d2e] w-[1px] absolute -right-[2px]"></div>
@@ -74,7 +76,7 @@ const props = withDefaults(defineProps<Props>(), {
           </th>
           <th scope="col" class="relative py-[2px] px-[2px] border-b-[2px] border-[#434446]">
             <div
-              class="text-[#fff] w-full flex items-center px-[4px] text-start bg-transparent hover:bg-background-presentation-action-hover  transition-[background-color,color] duration-200 rounded-[3px] h-[32px] typography-body-medium-semibold min-w-[10px] relative"
+              class="text-[#fff] w-full flex items-center px-[4px] text-start bg-transparent hover:bg-background-presentation-action-hover transition-[background-color,color] duration-200 rounded-[3px] h-[32px] typography-body-medium-semibold min-w-[10px] relative"
             >
               Receiving Station
               <div class="h-[80%] bg-[#2c2d2e] w-[1px] absolute -right-[2px]"></div>
@@ -100,23 +102,19 @@ const props = withDefaults(defineProps<Props>(), {
             </td>
           </tr>
         </template>
-        <tr
-          v-for="item in items"
-          :key="item.id"
-          class="hover:bg-[#ffffff08] transition-colors"
-        >
+        <tr v-for="item in items" :key="item.id" class="hover:bg-[#ffffff08] transition-colors">
           <td
-            class="truncate h-[40px] text-[#e5e5e5]  relative border-r border-b border-[#434446] px-1 rtl:border-l rtl:border-r-0 break-all text-[12px] "
+            class="truncate h-[40px] text-[#e5e5e5] relative border-r border-b border-[#434446] px-1 rtl:border-l rtl:border-r-0 break-all text-[12px]"
           >
             {{ item.billNumber }}
           </td>
           <td
-            class="truncate h-[40px] text-[#e5e5e5]  relative border-r border-b border-[#434446] px-1 rtl:border-l rtl:border-r-0 break-all text-[12px] font-normal"
+            class="truncate h-[40px] text-[#e5e5e5] relative border-r border-b border-[#434446] px-1 rtl:border-l rtl:border-r-0 break-all text-[12px] font-normal"
           >
             {{ item.receiver }}
           </td>
           <td
-            class="truncate h-[40px] text-[#e5e5e5]  relative border-r border-b border-[#434446] px-1 rtl:border-l rtl:border-r-0 break-all text-[12px] font-normal"
+            class="truncate h-[40px] text-[#e5e5e5] relative border-r border-b border-[#434446] px-1 rtl:border-l rtl:border-r-0 break-all text-[12px] font-normal"
           >
             {{ Number(item.amount).toLocaleString() }}
           </td>
@@ -128,35 +126,40 @@ const props = withDefaults(defineProps<Props>(), {
                 'flex items-center gap-1 px-[6px] py-1 rounded-lg w-fit',
                 item.paidStatus === 'paid'
                   ? 'border border-[#00679a] bg-[#00679a33]'
-                  : 'border border-[#88071d] bg-[#00151f]'
+                  : 'border border-[#88071d] bg-[#00151f]',
               ]"
             >
               <div
                 :class="[
                   'size-1 rounded-full',
-                  item.paidStatus === 'paid' ? 'bg-[#00679a]' : 'bg-[#88071d]'
+                  item.paidStatus === 'paid' ? 'bg-[#00679a]' : 'bg-[#88071d]',
                 ]"
               ></div>
               {{ item.paidStatus }}
             </div>
           </td>
           <td
-            class="truncate h-[40px] text-[#e5e5e5]  relative border-r border-b border-[#434446] px-1 rtl:border-l rtl:border-r-0 break-all text-[12px] font-normal"
+            class="truncate h-[40px] text-[#e5e5e5] relative border-r border-b border-[#434446] px-1 rtl:border-l rtl:border-r-0 break-all text-[12px] font-normal"
           >
             {{ item.issuingDate }}
           </td>
           <td
-            class="truncate h-[40px] text-[#e5e5e5]  relative border-r border-b border-[#434446] px-1 rtl:border-l rtl:border-r-0 break-all text-[12px] font-normal"
+            class="truncate h-[40px] text-[#e5e5e5] relative border-r border-b border-[#434446] px-1 rtl:border-l rtl:border-r-0 break-all text-[12px] font-normal"
           >
             {{ item.executionDate }}
           </td>
           <td
-            class="truncate h-[40px] text-[#e5e5e5]  relative border-r border-b border-[#434446] px-1 rtl:border-l rtl:border-r-0 break-all text-[12px] font-normal"
+            class="truncate h-[40px] text-[#e5e5e5] relative border-r border-b border-[#434446] px-1 rtl:border-l rtl:border-r-0 break-all text-[12px] font-normal"
           >
             {{ item.receivingStation }}
           </td>
-          <td class="flex items-center gap-4 truncate h-[43px] text-[#e5e5e5] relative border-r border-b border-[#434446] px-1 rtl:border-l rtl:border-r-0 break-all text-[12px] font-normal">
-            <span class="cursor-pointer hover:bg-[#ffffff15] p-1 rounded-md transition-colors duration-200" @click.stop="emit('view', item.id)">
+          <td
+            class="flex items-center gap-4 truncate h-[43px] text-[#e5e5e5] relative border-r border-b border-[#434446] px-1 rtl:border-l rtl:border-r-0 break-all text-[12px] font-normal"
+          >
+            <span
+              class="cursor-pointer hover:bg-[#ffffff15] p-1 rounded-md transition-colors duration-200"
+              @click.stop="emit('view', item.id)"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -177,7 +180,10 @@ const props = withDefaults(defineProps<Props>(), {
                 />
               </svg>
             </span>
-            <span class="cursor-pointer hover:bg-[#ffffff15] p-1 rounded-md transition-colors duration-200" @click.stop="emit('edit', item.id)">
+            <span
+              class="cursor-pointer hover:bg-[#ffffff15] p-1 rounded-md transition-colors duration-200"
+              @click.stop="emit('edit', item.id)"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -193,7 +199,10 @@ const props = withDefaults(defineProps<Props>(), {
                 />
               </svg>
             </span>
-            <span class="cursor-pointer hover:bg-[#ffffff15] p-1 rounded-md transition-colors duration-200" @click.stop="emit('delete', item.id)">
+            <span
+              class="cursor-pointer hover:bg-[#ffffff15] p-1 rounded-md transition-colors duration-200"
+              @click.stop="emit('delete', item.id)"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

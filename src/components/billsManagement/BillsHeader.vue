@@ -21,16 +21,21 @@ function logout() {
 </script>
 
 <template>
-  <div class="flex items-center gap-4 justify-between relative w-full px-4  h-[60px] bg-[#000 rounded-t-[6px] border-b border-[#2c2d2e] bg-black">
-<div
-  class="absolute top-[0px] w-[170px] rounded-t-[6px] z-10 h-full left-[0px] bg-[linear-gradient(132deg,#0d0f4e_0%,#000_50%)]"
-
-></div>
-    <h2 class="min-w-fit text-2xl text-[#e5e5e5] z-20  flex-shrink  text-[28px] leading-[120%] font-normal tracking-[-0.28px]">Bills Management</h2>
+  <div
+    class="flex items-center gap-4 justify-between relative w-full px-4 h-[60px] bg-[#000 rounded-t-[6px] border-b border-[#2c2d2e] bg-black"
+  >
+    <div
+      class="absolute top-[0px] w-[170px] rounded-t-[6px] z-10 h-full left-[0px] bg-[linear-gradient(132deg,#0d0f4e_0%,#000_50%)]"
+    ></div>
+    <h2
+      class="min-w-fit text-2xl text-[#e5e5e5] z-20 flex-shrink text-[28px] leading-[120%] font-normal tracking-[-0.28px]"
+    >
+      Bills Management
+    </h2>
     <div class="flex gap-2 flex-shrink-0">
       <button
         @click="emit('add')"
-        class="flex min-w-fit items center gap-[3px] px-3 h-[34px] justify-center items-center  text-[#e5e5e5] bg-[#ffffff26] rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 "
+        class="flex min-w-fit items center gap-[3px] px-3 h-[34px] justify-center items-center text-[#e5e5e5] bg-[#ffffff26] rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
         <svg
           class="w-4 h-4"
@@ -50,7 +55,7 @@ function logout() {
       </button>
       <button
         @click="confirmDialog = true"
-        class="flex min-w-fit items center gap-2 px-2 justify-center  items-center h-[34px] text-[#e5e5e5] bg-[#ffffff26] rounded-lg shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 "
+        class="flex min-w-fit items center gap-2 px-2 justify-center items-center h-[34px] text-[#e5e5e5] bg-[#ffffff26] rounded-lg shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
       >
         <svg
           class="w-6 h-6"
@@ -69,29 +74,39 @@ function logout() {
       </button>
     </div>
   </div>
-  <div class="flex flex-col items-start px-4  gap-4 ">
+  <div class="flex flex-col items-start px-4 gap-4">
     <div class="flex-1 flex gap-4 flex-wrap">
-      <div class="flex md:items-center border border-[#797c7f] rounded-lg text-[#e5e5e5] min-w-fit gap-1 break-words bg-[#ffffff1a] px-[6px] text-[12px]">
+      <div
+        class="flex md:items-center border border-[#797c7f] rounded-lg text-[#e5e5e5] min-w-fit gap-1 break-words bg-[#ffffff1a] px-[6px] text-[12px]"
+      >
         <div class="size-1 bg-[#797c7f] rounded-full"></div>
         <span>Paid Amount:</span>
         <b>{{ Number(statistics.totalPaidAmount).toLocaleString() }}</b>
       </div>
-      <div class="flex md:items-center text-[#e5e5e5] rounded-lg px-[6px] text-[12px] border border-[#88071d] bg-[#00151f] min-w-fit gap-1 break-words">
+      <div
+        class="flex md:items-center text-[#e5e5e5] rounded-lg px-[6px] text-[12px] border border-[#88071d] bg-[#00151f] min-w-fit gap-1 break-words"
+      >
         <div class="size-1 bg-[#88071d] rounded-full"></div>
         <span>Unpaid Amount:</span>
         <b>{{ Number(statistics.totalUnpaidAmount).toLocaleString() }}</b>
       </div>
-      <div class="flex border border-[#00679a] rounded-lg text-[#e5e5e5] px-[6px] text-[12px] bg-[#00679a33] md:items-center min-w-fit gap-1 break-words">
+      <div
+        class="flex border border-[#00679a] rounded-lg text-[#e5e5e5] px-[6px] text-[12px] bg-[#00679a33] md:items-center min-w-fit gap-1 break-words"
+      >
         <div class="size-1 bg-[#00679a] rounded-full"></div>
         <span>Total Bills:</span>
         <b>{{ totalItems }}</b>
       </div>
-      <div class="flex md:items-center min-w-fit gap-1 break-words text-[#e5e5e5] rounded-lg px-[6px] text-[12px] border border-[#db4726] bg-[#db472633]">
+      <div
+        class="flex md:items-center min-w-fit gap-1 break-words text-[#e5e5e5] rounded-lg px-[6px] text-[12px] border border-[#db4726] bg-[#db472633]"
+      >
         <div class="size-1 bg-[#db4726] rounded-full"></div>
         <span>Executed:</span>
         <b>{{ statistics.executed }}</b>
       </div>
-      <div class="flex md:items-center min-w-fit gap-1 break-words text-[#e5e5e5] rounded-lg px-[6px] text-[12px] border border-[#ffb700] bg-[#ffb70033]">
+      <div
+        class="flex md:items-center min-w-fit gap-1 break-words text-[#e5e5e5] rounded-lg px-[6px] text-[12px] border border-[#ffb700] bg-[#ffb70033]"
+      >
         <div class="size-1 bg-[#ffb700] rounded-full"></div>
         <span>Pending:</span>
         <b>{{ statistics.pending }}</b>

@@ -1,9 +1,27 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { Form, useForm } from 'vee-validate'
 import * as yup from 'yup'
 import { Field } from 'vee-validate'
-import type { Bills, Transaction } from '@/models/bills'
+
+// Define the interfaces explicitly here
+interface Transaction {
+  amount: string
+  paymentDate: string
+}
+
+interface Bills {
+  billNumber: string
+  receiver: string
+  amount: string
+  paidStatus: string
+  billStatus: string
+  issuingDate: string
+  executionDate: string
+  receivingStation: string
+  transactions: Transaction[]
+  id?: string | number
+}
 
 interface Props {
   id?: string | null
@@ -77,7 +95,7 @@ const getBill = async () => {
 }
 
 const handleAddTransaction = () => {
-  form.value.transactions.push(transactionForm.value)
+  form.value.transactions.push({ ...transactionForm.value })
   transactionForm.value = {
     amount: '',
     paymentDate: '',
@@ -224,7 +242,9 @@ watch(
               class="flex justify-between items-center p-3 bg-[#131415] rounded-lg border border-[#2c2d2e] hover:border-[#434446] transition-colors"
             >
               <div class="flex flex-col">
-                <span class="text-[#e5e5e5] font-medium">{{ Number(transaction.amount).toLocaleString() }}</span>
+                <span class="text-[#e5e5e5] font-medium">{{
+                  Number(transaction.amount).toLocaleString()
+                }}</span>
                 <span class="text-sm text-gray-400">{{ transaction.paymentDate }}</span>
               </div>
               <button

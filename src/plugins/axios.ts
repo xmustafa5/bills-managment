@@ -13,7 +13,7 @@ const STORAGE_KEY = 'bills'
 import demoData from '../../demo.json'
 
 // Initialize localStorage with demo data if empty
-if (localStorage.getItem(STORAGE_KEY) === '[]') {
+if (localStorage.getItem(STORAGE_KEY) === '[]' || !localStorage.getItem(STORAGE_KEY)) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(demoData))
 }
 
