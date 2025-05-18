@@ -81,7 +81,7 @@ async function getBills() {
       perPage: pagination.value.itemsPerPage,
       ...filter.value,
     })
-    .then((res) => {
+    .then((res: any) => {
       pagination.value.totalItems = res.totalCount
       statistics.totalPaidAmount = res.totalPaidAmount
       statistics.totalUnpaidAmount = res.totalUnpaidAmount
@@ -161,72 +161,61 @@ watch(
 </script>
 
 <template>
-  <div class="flex flex-col h-full gap-4 p-[2px] relative  bg-[#2c2d2e] rounded-lg
-  bg-[linear-gradient(143deg,#0075ff_0px,#2c2d2e_55px)]
-  ">
-
-
-    <div class="flex flex-col h-full gap-4  rounded-md bg-[#090b0d] relative z-20">
-
-    <BillsHeader
-      :total-items="pagination.totalItems"
-      :statistics="statistics"
-      @add="handleAdd"
-    />
-<div class="p-2 flex flex-col gap-2 h-full">
-
-    <div class="bg-[#131415] rounded-lg shadow-md overflow-hidden">
-      <BaseExpandPanel title="Filters">
-        <BillsFilter v-model="filter" @filter="handleFilter" />
-        <div class="flex justify-end mt-4 gap-2">
-          <button
-            @click="resetFilter"
-            class="px-4 py-2 text-gray-400 bg-[#27292b] rounded-md hover:bg-[#323436] transition-colors"
-          >
-            Reset
-          </button>
-          <button
-            @click="getBills"
-            class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-          >
-            Apply Filter
-          </button>
+  <div
+    class="flex flex-col h-full gap-4 p-[2px] relative bg-[#2c2d2e] rounded-lg bg-[linear-gradient(143deg,#0075ff_0px,#2c2d2e_55px)]"
+  >
+    <div class="flex flex-col h-full gap-4 rounded-md bg-[#090b0d] relative z-20">
+      <BillsHeader :total-items="pagination.totalItems" :statistics="statistics" @add="handleAdd" />
+      <div class="p-2 flex flex-col gap-2 h-full">
+        <div class="bg-[#131415] rounded-lg shadow-md overflow-hidden">
+          <BaseExpandPanel title="Filters">
+            <BillsFilter v-model="filter" @filter="handleFilter" />
+            <div class="flex justify-end mt-4 gap-2">
+              <button
+                @click="resetFilter"
+                class="px-4 py-2 text-gray-400 bg-[#27292b] rounded-md hover:bg-[#323436] transition-colors"
+              >
+                Reset
+              </button>
+              <button
+                @click="getBills"
+                class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+              >
+                Apply Filter
+              </button>
+            </div>
+          </BaseExpandPanel>
         </div>
-      </BaseExpandPanel>
+
+        <BillsTable
+          :loading="loading"
+          :items="items"
+          @delete="handleDelete"
+          @edit="handleEdit"
+          @view="handleView"
+        />
+
+        <BasePagination
+          v-model:currentPage="pagination.currentPage"
+          :totalItems="pagination.totalItems"
+          :itemsPerPage="pagination.itemsPerPage"
+          :maxVisiblePages="pagination.maxVisiblePages"
+        />
+
+        <BaseDeleteDialog
+          @done="getBills"
+          v-model="showDeleteDialog"
+          :url="`/api/bills/${itemIdToDelete}`"
+        />
+
+        <BaseDialog v-model="showFormDrawer" :title="itemIdToEdit ? 'Edit Bill' : 'Add Bill'">
+          <BillsForm :id="itemIdToEdit" @done="handleFormDone" />
+        </BaseDialog>
+
+        <BaseDialog v-model="showViewDrawer">
+          <BillsView :id="itemIdToView" @edit="handleEdit" />
+        </BaseDialog>
+      </div>
     </div>
-
-
-    <BillsTable
-      :loading="loading"
-      :items="items"
-      @delete="handleDelete"
-      @edit="handleEdit"
-      @view="handleView"
-    />
-
-    <BasePagination
-      v-model:currentPage="pagination.currentPage"
-      :totalItems="pagination.totalItems"
-      :itemsPerPage="pagination.itemsPerPage"
-      :maxVisiblePages="pagination.maxVisiblePages"
-    />
-
-    <BaseDeleteDialog
-      @done="getBills"
-      v-model="showDeleteDialog"
-      :url="`/api/bills/${itemIdToDelete}`"
-    />
-
-    <BaseDialog v-model="showFormDrawer" :title="itemIdToEdit ? 'Edit Bill' : 'Add Bill'">
-      <BillsForm :id="itemIdToEdit" @done="handleFormDone" />
-    </BaseDialog>
-
-    <BaseDialog v-model="showViewDrawer">
-      <BillsView :id="itemIdToView" @edit="handleEdit" />
-    </BaseDialog>
-</div>
-
   </div>
-    </div>
-
 </template>

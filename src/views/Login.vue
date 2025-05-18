@@ -17,11 +17,11 @@ const credentials = ref({
   password: '',
 })
 
-const handleLogin = async (v) => {
+const handleLogin = async () => {
   isLoading.value = true
   await baseService
     .create('api/login', credentials.value)
-    .then((res) => {
+    .then((res: any) => {
       AuthStorageUtils.saveAccessTokenToLocalStorage(res?.token)
       router.push('/')
     })
